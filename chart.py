@@ -2,7 +2,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Generate realistic synthetic data
+# Generate synthetic data for product categories
 data = {
     'Product Category': [
         'Electronics', 'Apparel', 'Home Goods', 
@@ -15,35 +15,28 @@ data = {
 
 df = pd.DataFrame(data)
 
-# Set Seaborn style and context for professional look
+# Set Seaborn style and context
 sns.set_style('whitegrid')
 sns.set_context('talk')
-
-# Set color palette
 palette = sns.color_palette('Set2')
 
-# Create figure with required size for 512x512 pixels
-plt.figure(figsize=(8, 8))
+plt.figure(figsize=(8, 8))  # 8*64=512px
 
-# Seaborn barplot
 ax = sns.barplot(
     x='Average Satisfaction Score', 
     y='Product Category', 
     data=df,
     palette=palette
 )
+plt.title('Average Customer Satisfaction by Product Category', weight='bold')
+plt.xlabel('Average Satisfaction Score')
+plt.ylabel('Product Category')
 
-# Add titles and labels
-plt.title('Average Customer Satisfaction by Product Category', fontsize=18, weight='bold')
-plt.xlabel('Average Satisfaction Score', fontsize=14)
-plt.ylabel('Product Category', fontsize=14)
-
-# Optional: Show values on bars for clarity
-for index, value in enumerate(df['Average Satisfaction Score']):
-    ax.text(value + 0.05, index, f'{value:.1f}', va='center', fontsize=13)
+for i, v in enumerate(df['Average Satisfaction Score']):
+    ax.text(v + 0.05, i, f'{v:.1f}', va='center')
 
 plt.tight_layout()
 
-# Save chart as PNG (512x512 pixels)
-plt.savefig('chart.png', dpi=64, bbox_inches='tight')
+# Exactly 512x512 pixels!
+plt.savefig('chart.png', dpi=64)
 plt.close()
