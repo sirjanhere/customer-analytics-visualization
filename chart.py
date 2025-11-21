@@ -3,8 +3,12 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-sns.set_style('whitegrid')
-sns.set_context('talk')
+plt.rcParams['figure.figsize'] = (8, 8)
+plt.rcParams['figure.dpi'] = 64
+plt.rcParams['savefig.dpi'] = 64
+
+sns.set_style("whitegrid")
+sns.set_context("paper", font_scale=1.0)
 
 np.random.seed(42)
 categories = ['Electronics', 'Home Appliances', 'Furniture', 'Clothing', 'Sports']
@@ -15,8 +19,7 @@ df = pd.DataFrame({
     'Average Satisfaction Score': scores
 })
 
-# Create chart normally
-plt.figure(figsize=(8, 8), dpi=64)
+plt.figure()
 sns.barplot(
     data=df,
     x='Product Category',
@@ -24,22 +27,8 @@ sns.barplot(
     palette='Blues_d'
 )
 
-plt.title('Average Customer Satisfaction by Product Category')
-plt.xlabel('Product Category')
-plt.ylabel('Avg Satisfaction Score')
+plt.title("Average Customer Satisfaction by Product Category")
+plt.xlabel("Product Category")
+plt.ylabel("Avg Satisfaction Score")
 
-plt.savefig("chart_raw.png")  # save temporary raw file
-plt.show()
-
-# ---- FORCE RESIZE ----
-from PIL import Image
-
-img = Image.open("chart_raw.png")
-img = img.resize((512, 512), Image.LANCZOS)
-img.save("chart.png")   # final output
-
-print("Final size:", Image.open("chart.png").size)
-
-
-# from google.colab import files
-# files.download('chart.png')
+plt.savefig("chart.png")
