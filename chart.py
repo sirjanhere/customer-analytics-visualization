@@ -3,12 +3,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-plt.rcParams['figure.figsize'] = (8, 8)
-plt.rcParams['figure.dpi'] = 64
-plt.rcParams['savefig.dpi'] = 64
-
-sns.set_style("whitegrid")
-sns.set_context("paper", font_scale=1.0)
+# No theme, no style, no overrides
+# Ensures white background and default seaborn barplot
+# DO NOT change anything here
 
 np.random.seed(42)
 categories = ['Electronics', 'Home Appliances', 'Furniture', 'Clothing', 'Sports']
@@ -19,16 +16,18 @@ df = pd.DataFrame({
     'Average Satisfaction Score': scores
 })
 
-plt.figure()
+plt.figure(figsize=(8, 8), dpi=64)   # EXACT 512x512 output
+
 sns.barplot(
     data=df,
     x='Product Category',
     y='Average Satisfaction Score',
-    palette='Blues_d'
+    color='#4C72B0'  # seaborn default bar color
 )
 
-plt.title("Average Customer Satisfaction by Product Category")
-plt.xlabel("Product Category")
-plt.ylabel("Avg Satisfaction Score")
+plt.title('Average Customer Satisfaction by Product Category')
+plt.xlabel('Product Category')
+plt.ylabel('Avg Satisfaction Score')
 
-plt.savefig("chart.png")
+plt.savefig("chart.png", dpi=64)  # EXACT 512x512
+plt.show()
